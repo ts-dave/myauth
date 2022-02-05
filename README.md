@@ -1,2 +1,2 @@
 # myauth
-Authentication system using with Django backend
+Authentication system with Django backend
