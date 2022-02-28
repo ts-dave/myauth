@@ -1,0 +1,97 @@
+{% extends 'base.html' %} 
+{% block content %}
+<section
+  class="d-flex justify-content-center align-items-center"
+  style="font-family: Roboto, sans-serif"
+>
+  <div
+    class="p-5 shadow-sm"
+    style="
+      background: #ffffff;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    "
+  >
+    <h3 class="text-center">MyAuth SignUp</h3>
+    <p class="text-center text-black-50 mb-4">
+      Welcome! Enter details to create myauth account
+    </p>
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close">
+      </button>
+      <span>{{ message }}</span>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <form method="post" action="{% url 'accounts:register' %}">
+      {% csrf_token %}
+      <div class="mb-2">
+        <label
+          class="form-label text-black-50 form-label"
+          for="usernameField"
+          style="font-size: 14px"
+          >USERNAME</label
+        >
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span
+          > {{ form.username }}
+        </div>
+      </div>
+      <small class="text-danger mb-2">{{ form.username.errors }}</small>
+
+      <div class="mb-2">
+        <label
+          class="form-label text-black-50 form-label"
+          for="emailField"
+          style="font-size: 14px"
+          >EMAIL</label
+        >
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+          {{ form.email }}
+        </div>
+        <small class="text-danger mb-2">{{ form.email.errors }}</small>
+      </div>
+
+      <div class="mb-2">
+        <label
+          class="form-label text-black-50 form-label"
+          for="passwordField"
+          style="font-size: 14px"
+          >PASSWORD</label
+        >
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span
+          >{{ form.password1 }}
+          <span class="input-group-text"><i class="far fa-eye"></i></span>
+        </div>
+      </div>
+      <div class="mb-2">
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span
+          >{{ form.password2 }}
+          <span class="input-group-text"><i class="far fa-eye"></i></span>
+        </div>
+      </div>
+      <small class="text-danger mb-0">{{ form.password1.errors }}</small>
+      <small class="text-danger mb-2">{{ form.password2.errors }}</small>
+      <button class="btn btn-primary mb-3 submit" type="submit">Sign Up</button>
+    </form>
+    <p class="text-center text-black-50 mb-4">
+      Already have an account, <a style="text-decoration: none;" href="{% url 'accounts:login' %}">Login</a>
+    </p>
+  </div>
+</section>
+{% endblock content %}
+

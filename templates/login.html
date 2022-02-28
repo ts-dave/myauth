@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% block content %}
+
+<section
+  class="d-flex justify-content-center align-items-center"
+  style="font-family: Roboto, sans-serif"
+>
+  <div
+    class="p-5 shadow-sm"
+    style="
+      background: #ffffff;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    "
+  >
+    <h3 class="text-center">MyAuth Login</h3>
+    <p class="text-center text-black-50 mb-4">
+      Welcome! Enter Username and Password to login
+    </p>
+    
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-{{ message.tags }} alert-dismissible" role="alert">
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close">
+        </button>
+        <span>{{ message }}</span>
+      </div>
+      {% endfor %}
+      {% endif %}
+
+    <form method="post" action="{% url 'accounts:login' %}">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label
+          class="form-label text-black-50 form-label"
+          for="usernameField"
+          style="font-size: 14px"
+          >USERNAME</label
+        >
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span
+          >{{ form.username }}
+        </div>
+        <small class="text-danger mb-2">{{ form.username.errors }}</small>
+      </div>
+      <div class="mb-2">
+        <label
+          class="form-label text-black-50 form-label"
+          for="passwordField"
+          style="font-size: 14px"
+          >PASSWORD</label
+        >
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-lock"></i></span
+          >{{ form.password }}
+          <span class="input-group-text"><i class="far fa-eye"></i></span>
+        </div>
+        <small class="text-danger mb-2">{{ form.password.errors }}</small>
+      </div>
+      <div class="d-flex justify-content-between mb-4">
+        <div class="form-check">
+         {{ form.remember_me }}
+         <label class="form-check-label text-black-50" for="formCheck-1"
+            >Remember Me</label
+          >
+        </div>
+        <a class="forgot" href="{% url 'accounts:forgot_password' %}">Forgot Password</a>
+      </div>
+      <button class="btn btn-primary mb-3 submit" type="submit">LOGIN</button
+      ><a
+        class="btn btn-light link-primary shadow-sm submit signup"
+        role="button"
+        href="{% url 'accounts:register' %}"
+        >SIGN UP</a
+      >
+    </form>
+  </div>
+</section>
+{% endblock content %}

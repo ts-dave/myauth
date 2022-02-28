@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<section
+  class="d-flex justify-content-center align-items-center"
+  style="font-family: Roboto, sans-serif"
+>
+  <div
+    class="text-center p-5 shadow-sm"
+    style="
+      background: #ffffff;
+      border-radius: 10px;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    "
+  >
+    <h4 class="text-center">Profile page</h4>
+    <img
+      class="rounded-circle img-fluid mb-2"
+      src="{% static 'img/profile_picture.jpg' %}"
+      width="100"
+      height="100"
+    />
+    <p class="text-center text-black-50 mb-1">
+      Welcome {{ request.user.username }}!
+    </p>
+    <p class="text-center text-black-50 mb-4">
+      You have successfully logged into myauth app
+    </p>
+    <a class="btn btn-secondary mb-3 submit" role="button" href="{% url 'accounts:logout' %}">Logout</a>
+  </div>
+</section>
+{% endblock content %}
