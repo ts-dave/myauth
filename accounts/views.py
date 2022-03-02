@@ -29,11 +29,17 @@ class LoginView(LogoutRequiredMixin, View):
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
+            remember_me = form.cleaned_data['remember_me']
             user = authenticate(request, username=username, password=password)
 
             if user is not None:
                 login(request, user)
-                # TODO: Handle remember_me
+
+                if remember_me:
+                    request.session.set_expiry(2592000)
+                else:
+                    request.session.set_expiry(0)
+
                 return redirect('accounts:profile')
 
             else:
