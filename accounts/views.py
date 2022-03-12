@@ -183,7 +183,7 @@ class VerifyPasswordChange(View):
                 return redirect('accounts:forgot_password')
 
         except Exception as e:
-            messages.error(request, 'Verificatoion error')
+            messages.error(request, 'Verification error')
             return redirect('accounts:forgot_password')
 
 
